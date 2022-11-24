@@ -1,0 +1,796 @@
+
+<!DOCTYPE html>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<html>
+	<head>
+		<link href="https://static.zohocdn.com/iam/v2/components/css/zohoPuvi.3d3956560dc86cf2020073a1e815367c.css" rel="stylesheet"type="text/css">
+		<link href="https://static.zohocdn.com/iam/v2/components/css/signin.faa75adbabd41c4ff9e37abe189d88cc.css" type="text/css" rel="stylesheet"/>
+        <link  href="https://static.zohocdn.com/iam/v2/components/css/flagStyle.999f12f046e3eab44639636179bc02ad.css" type="text/css" rel="stylesheet" defer/>
+        <script src="https://static.zohocdn.com/iam/v2/components/tp_pkg/jquery-3_5_1.min.9ac39dc31635a363e377eda0f6fbe03f.js" type="text/javascript"></script>
+        <script src="https://static.zohocdn.com/iam/v2/components/tp_pkg/select2.full.min.da607360bcc65284a197ada3d68d5439.js" type="text/javascript"></script>
+        <script src="https://static.zohocdn.com/iam/v2/components/tp_pkg/sjcl.c34b81d9a619f2cd9f09bf75eb160625.js" type="text/javascript" defer></script>
+        <script src="https://js.zohocdn.com/ichat/js/Nov_04_2022_3_wmsliteapi.js" type="text/javascript" defer></script>
+        <!-- Commmon webauthn methods moved to webauthn.js and called in mfa.js and signin.js -->
+	    <script src="https://static.zohocdn.com/iam/v2/components/js/webauthn.06df631fdc240bea0a9a7bbfb0c075c7.js" type="text/javascript" defer></script>
+        <script src="https://static.zohocdn.com/iam/v2/components/js/signin.1765933aa2060f9003e27c971980eb1b.js" type="text/javascript"></script>
+        <script src="https://static.zohocdn.com/iam/v2/components/tp_pkg/xregexp-all.2a67efb28253461665e6cd92f41b19b0.js" type="text/javascript"></script>
+        <script src="https://static.zohocdn.com/iam/v2/components/tp_pkg/u2f-api.5efcbd46fc391c7d06fabef02b162563.js" defer></script>
+        <script src="https://static.zohocdn.com/iam/v2/components/js/wmsliteimpl.4b5da3b165bd142e526c5c729e0be5f7.js" type="text/javascript" defer></script>
+		
+		<meta name="robots" content="noindex, nofollow"/>
+        <script type='text/javascript'>
+        	var serviceUrl,serviceName=undefined;
+			var csrfParam= "iamcsrcoo";
+			var csrfCookieName = "iamcsr";
+			var resetPassUrl = 'https://accounts.zoho.com/password';
+			var queryString = window.location.search.substring(1);
+			var signup_url =  getSignupUrl();
+			var signinParams= getSigninParms();
+			var isMobile = parseInt('0');
+			var loginID = "";
+			var isCaptchaNeeded ="false";
+			var UrlScheme = "ZOA";
+			var iamurl="https://accounts.zoho.com";
+			var displayname = "Site24x7";
+			var reqCountry="US";
+			var cookieDomain=".zoho.com";
+			var iam_reload_cookie_name="_z_identity";
+			var isDarkMode = parseInt("0");
+			var isMobileonly = 0;
+			var uriPrefix = '';
+			var isClientPortal = parseInt("0");
+			var contextpath = "";
+			var istlsEnabled = parseInt('0');
+			var enableServiceBasedBanner = parseInt('1');
+			var CC = '';
+			var isHideFedOptions = parseInt('1');			
+			var accounts_support_contact_email_id = 'support@zohoaccounts.com';
+			var fedlist = '[azure, google, apple]';
+			var isneedforGverify = Boolean(0);
+			I18N.load({
+					"IAM.ZOHO.ACCOUNTS" : 'Zoho Accounts',
+					"IAM.ERROR.ENTER_PASS" : 'Please enter your password',
+					"IAM.SIGNIN.ERROR.CAPTCHA.REQUIRED" : 'Please enter the CAPTCHA.',
+					"IAM.NEW.SIGNIN.INVALID.OTP.MESSAGE.EMPTY" : 'Please enter the OTP',
+					"IAM.SIGNIN" : 'Sign in', 
+					"IAM.VERIFY" : 'Verify',
+					"IAM.GOOGLE.AUTHENTICATOR" : 'OTP Authenticator',
+					"IAM.NEW.SIGNIN.SMS.MODE" : 'SMS Verification',
+					"IAM.NEW.SIGNIN.TOTP" : 'Enter time-based OTP',
+					"IAM.NEW.SIGNIN.TOTP.HEADER" : 'A time-based one-time password has been generated in OneAuth.',		
+					"IAM.NEW.SIGNIN.VERIFY.PUSH" : 'Verify push notification',
+					"IAM.NEW.SIGNIN.TOUCHID.TITLE" : 'Verify Touch ID',
+					"IAM.NEW.SIGNIN.QR.CODE" : 'Scan QR code',
+					"IAM.NEW.SIGNIN.FACEID.TITLE" : 'Verify Face ID',
+					"IAM.NEW.SIGNIN.ENTER.EMAIL.OR.MOBILE" : 'Please enter your email address or mobile number',
+					"IAM.NEW.SIGNIN.OTP.SENT.DEVICE" : 'OTP sent to your mobile device',
+					"IAM.NEW.SIGNIN.OTP.SENT" : 'OTP sent to {0}',
+					"IAM.NEW.SIGNIN.TOUCHID.HEADER" : 'Use Touch ID in OneAuth to sign in to your account',
+					"IAM.NEW.SIGNIN.FACEID.HEADER" : 'Use Face ID in OneAuth to sign in to your account',
+					"IAM.PUSH.RESEND.NOTIFICATION" : 'Resend push notification',
+					"IAM.RESEND.PUSH.MSG" : 'Push notification sent to your device',
+					"IAM.NEXT" : 'Next',
+					"IAM.NEW.SIGNIN.ENTER.VALID.BACKUP.CODE" : 'Incorrect backup code. Please try again.',
+					"IAM.NEW.SIGNIN.INVALID.OTP.MESSAGE.NEW" : 'Please enter the OTP sent to your mobile number',
+					"IAM.NEW.SIGNIN.FEDERATED.USER.ERROR" : 'Please use federated sign-in',
+					"IAM.TFA.USE.BACKUP.CODE" : 'Use backup verification code',
+					"IAM.NEW.SIGNIN.CANT.ACCESS" : 'Can&#39;t access your mobile device?',
+					"IAM.NEW.SIGNIN.USING.OTP" : 'Sign in using OTP',
+					"IAM.SIGNIN.KEEP.ME" : 'Remember me',
+					"IAM.BACKUP.VERIFICATION_CODE" : 'Backup Verification Code',
+					"IAM.NEW.SIGNIN.BACKUP.HEADER" : 'Backup verification codes are 12-digit codes that are given to you when you set up multi-factor authentication.',
+					"IAM.NEW.SIGNIN.CONTACT.SUPPORT" : 'Contact Support',
+					"IAM.NEW.SIGNIN.FEDERATED.LOGIN.TITLE" : 'Sign in using',
+					"IAM.NEW.SIGNIN.KEEP.ACCOUNT.SECURE" : 'Keep your account secure',
+					"IAM.NEW.SIGNIN.ONEAUTH.INFO.HEADER" : 'Zoho OneAuth is our new in-house multi-factor authentication app. Shield your Zoho account with <a style="color:#309FF4;text-decoration:none;" href="{0}" target="_blank" >OneAuth</a> now.',
+					"IAM.HOME.WELCOMEPAGE.SIGNUP.NOW" : 'Don&#39;t have a Zoho account? <a href="javascript:{0}">Sign Up Now</a>',
+					"IAM.ERROR.USER.ACTION" : 'An error occured. Please try again later.',
+					"IAM.NEW.SIGNIN.MFA.SMS.HEADER" : 'Enter the OTP sent to {0}',
+					"IAM.NEW.SIGNIN.YUBIKEY.TITLE" : 'Verify your YubiKey',
+					"IAM.NEW.SIGNIN.YUBIKEY.HEADER.NEW" : 'Please insert a configured YubiKey into your computer. Tap the golden disc on YubiKey when it starts blinking.',
+					"IAM.ERROR.USER.ACTION" : 'An error occured. Please try again later.',
+					"IAM.TFA.TRUST.BROWSER.QUESTION" : 'Trust this browser?',
+					"IAM.NEW.SIGNIN.TRUST.HEADER.TOTP" : 'We won&#39;t ask you to verify your account with <b>OTP Authenticator</b> on this browser for the next <b>{0}</b> days.',
+					"IAM.NEW.SIGNIN.TRUST.HEADER.OTP" : 'We won&#39;t ask you to verify your account with an <b>OTP</b> on this browser for the next <b>{0}</b> days.',
+					"IAM.NEW.SIGNIN.TRUST.HEADER.TOUCHID" : 'We won&#39;t ask you to verify your account with <b>Touch ID</b> on this browser for the next <b>{0}</b> days.',
+					"IAM.NEW.SIGNIN.TRUST.HEADER.FACEID" : 'We won&#39;t ask you to verify your account with <b>Face ID</b> on this browser for the next <b>{0}</b> days.',
+					"IAM.NEW.SIGNIN.TRUST.HEADER.YUBIKEY" : 'We won&#39;t ask you to verify your account with <b>YubiKey</b> on this browser for the next <b>{0}</b> days.',
+					"IAM.NEW.SIGNIN.TRUST.HEADER.SCANQR" : 'We won&#39;t ask you to verify your account with <b>Scan QR</b> on this browser for the next <b>{0}</b> days.',
+					"IAM.NEW.SIGNIN.TRUST.HEADER.PUSH" : 'We won&#39;t ask you to verify your account with a <b>push notification</b> on this browser for the next <b>{0}</b> days.',
+					"IAM.TRUST" : 'Trust',
+					"IAM.NOTNOW" : 'Not now',
+					"IAM.NEW.SIGNIN.RETRY.YUBIKEY": 'Retry YubiKey verification',
+					"IAM.RECOVERY.MOBILE.LABEL" : 'Get a verification code on my phone',
+					"IAM.MOBILE.OTP.SENT" : 'A one-time password was sent to your mobile number. Verify the code below.',
+					"IAM.NEW.SIGNIN.PROBLEM.SIGNIN" : 'Problem signing in?',
+					"IAM.NEW.SIGNIN.CONTACT.SUPPORT.DESC" : 'Please send us an email at <a href="mailto:{0}" style="color:#696969;text-decoration:none;">{0}</a> describing your issue so we can assist you.',
+					"IAM.TOTP.TIME.BASED.OTP" : 'OTP Authenticator',
+					"IAM.NEW.SIGNIN.PASSWORD.TITLE" : 'Sign in with password',
+					"IAM.NEW.SIGNIN.PASSWORD.HEADER" : 'Use your Zoho account password to sign in',
+					"IAM.NEW.SIGNIN.SAML.TITLE" : 'Sign in with {0}',
+					"IAM.NEW.SIGNIN.SAML.HEADER" : 'You will be redirected to {0}',
+					"IAM.NEW.SIGNIN.CHOOSE.OTHER.WAY" : 'Sign in another way',
+					"IAM.NEW.SIGNIN.OTP.TITLE" : 'Sign in via mobile number',
+					"IAM.NEW.SIGNIN.VERIFY.VIA.YUBIKEY" : 'Verify via YubiKey',
+					"IAM.NEW.SIGNIN.VERIFY.VIA.YUBIKEY.DESC" : 'Please insert a configured YubiKey into your computer. Tap the golden disc on YubiKey when it starts blinking.',
+					"IAM.NEW.SIGNIN.VERIFY.VIA.AUTHENTICATOR" : 'Authenticator app',
+					"IAM.NEW.SIGNIN.VERIFY.VIA.OTP" : 'SMS Verification',
+					"IAM.NEW.SIGNIN.VERIFY.VIA.ONEAUTH.DESC" : 'Verify your sign in via <b>{0}</b> using the OneAuth app installed on your device <b>{1}</b>',
+					"IAM.NEW.SIGNIN.VERIFY.VIA.ONEAUTH" : 'OneAuth',
+					"IAM.NEW.SIGNIN.OTP.HEADER" : 'A one-time password will be sent to <b>{0}</b>',
+					"IAM.NEW.SIGNIN.VERIFY.VIA.AUTHENTICATOR.DESC" : 'Enter the time-based OTP from your authenticator app here.',
+					"IAM.NEW.SIGNIN.TRY.ANOTHERWAY":'Sign in another way',
+					"IAM.NEW.SIGNIN.QR.HEADER":'Scan the QR code using OneAuth to sign in to your account',
+					"IAM.NEW.SIGNIN.MFA.PUSH.HEADER":'Accept the push notification in OneAuth to sign in',
+					"IAM.NEW.SIGNIN.WAITING.APPROVAL":'Waiting for approval',
+					"IAM.PHONE.ENTER.VALID.MOBILE_NUMBER":'Please enter a valid mobile number',
+					"IAM.MFA.YUBIKEY.ERROR.INVALID.REQUEST":'An error occurred. Please try again later.',
+					"IAM.NEW.SIGNIN.YUBIKEY.ERROR.DEVICEINELIGIBLE":'YubiKey verification failed. Please try again.',
+					"IAM.NEW.SIGNIN.YUBIKEY.ERROR.UNSUPPORTED":'This browser does not support YubiKey authentication. Please try again with a different browser. <a href="https://help.zoho.com/portal/en/kb/articles/troubleshoot-mfa-issues">Learn more</a>',
+					"IAM.NEW.SIGNIN.YUBIKEY.ERROR.BADREQUEST":'Please try again with your registered URL.',
+					"IAM.SIGNIN.ERROR.USEREMAIL.NOT.EXIST":'Please verify your email address and try again.',
+					"IAM.NEW.SIGNIN.MFA.TOTP.HEADER":'Enter the OTP generated on your authenticator app',
+					"IAM.NEW.SIGNIN.MFA.PASSWORD.HEADER":'Password Verification',
+					"IAM.NEW.SIGNIN.MFA.PASSWORD.DESC":'Verify sign-in via your Zoho account password',
+					"IAM.NEW.SIGNIN.SERVICE.NAME.TITLE":'to access <span>{0}</span>',
+					"IAM.SIGNIN.ERROR.CAPTCHA.INVALID":'Incorrect CAPTCHA. Please try again.',
+					"IAM.SIGNIN.ERROR.INVALID.VERIFICATION.CODE":'Incorrect OTP. Please try again.',
+					"IAM.RESETPASS.PASSWORD.MIN.ONLY":'{0} characters',
+					"IAM.RESET.PASSWORD.POLICY.MINSPECIALCHAR.ONLY":'{0} symbol(s)',
+					"IAM.RESET.PASSWORD.POLICY.MINNUMERICCHAR.ONLY":'{0} number(s)',
+					"IAM.RESET.PASSWORD.POLICY.CASE.BOTH":'both upper and lower case letters',
+					"IAM.RESETPASS.PASSWORD.MIN.NO.WITH":'{0} characters',
+					"IAM.PASSWORD.POLICY.HEADING":'Include at least',
+					"IAM.RESETPASS.PASSWORD.MIN":'{0} characters with',
+					"IAM.RESETPASS.PASSWORD.MIN":'{0} characters with',
+					"IAM.INCLUDE":'Include',
+					"IAM.NEW.SIGNIN.PASSWORD.EXPIRED.ORG.DESC":'Your organization policy requires you to change your password every {0} days.',
+					"IAM.NEW.SIGNIN.PASSWORD.EXPIRED.ORG.DESC.NOW":'Your organization policy requires you to change your password now.',
+					"IAM.ERROR.ENTER.NEW.PASS":'Please enter new password',
+					"IAM.ERROR.PASS.LEN":'Password cannot be less than {0} characters',
+					"IAM.ERROR.PASSWORD.MAXLEN":'Password cannot be more than {0} characters',
+					"IAM.PASSWORD.POLICY.LOGINNAME":'Password cannot be same as your username',
+					"IAM.ERROR.WRONG.CONFIRMPASS":'Wrong password confirmation',
+					"IAM.NEW.SIGNIN.PASS.EXPIRY.SUCCESS.DESC":'Sign-in with your new password to access Zoho services.',
+					"IAM.NEW.SIGNIN.PASS.EXPIRY.SUCCESS.TITLE":'Password updated',
+					"IAM.NEW.SIGNIN.PASS.EXPIRY.SUCCESS.BUTTON":'Signin now',
+					"IAM.NEW.SIGNIN.TITLE.RANDOM":'Refresh CAPTCHA',
+					"IAM.PLEASE.CONNECT.INTERNET":'No network found. Please connect to Internet',
+					"IAM.NEW.SIGNIN.RESEND.OTP":'Resend OTP',
+					"IAM.TFA.RESEND.OTP.COUNTDOWN":'Resend in <span>60</span>s',
+					"IAM.NEW.SIGNIN.PASS.PHRASE.TITLE":'Sign in via passphrase',
+					"IAM.NEW.SIGNIN.PASS.PHRASE.DESC":'Enter the passphrase you&#39;ve set up in your OneAuth app.',
+					"IAM.NEW.SIGNIN.MFA.PASSPHRASE.HEADER":'Sign in using passphrase',
+					"IAM.NEW.SIGNIN.MFA.PASSPHRASE.DESC":'Use passphrase to sign in to your OneAuth app',
+					"IAM.NEW.SIGNIN.PASSPHRASE.RECOVER.HEADER":'Enter the passphrase you created to sign in to your OneAuth app.',
+					"IAM.NEW.SIGNIN.BACKUP.RECOVER.HEADER":'Enter the backup verification code you generated from your Zoho account.',
+					"IAM.NEW.SIGNIN.PASSPHRASE.RECOVER.TITLE":'Passphrase',
+					"IAM.NEW.SIGNIN.MORE.FEDRATED.ACCOUNTS.TITLE":'Sign in using linked accounts',
+					"IAM.NEW.SIGNIN.MORE.FEDRATED.ACCOUNTS.DESC":'Use your linked accounts to access your Zoho account',
+					"IAM.NEW.SIGNIN.IDENTITY.PROVIDER.TITLE":'Sign in using your <span style="text-transform: capitalize;">{0}</span> account.',
+					"IAM.NEW.SIGNIN.TRY.ANOTHERWAY.HEADER":'Alternate verification',
+					"IAM.NEW.SIGNIN.ENTER.VALID.PASSPHRASE.CODE":'Please enter the passphrase',
+					"IAM.NEW.SIGNIN.RIGHT.PANEL.VERIFY.SCANQR":'Scan the QR code displayed on signin page using your OneAuth app',
+					"IAM.NEW.SIGNIN.RIGHT.PANEL.ALLOW.SCANQR":'Open your OneAuth and tap <b>View SCAN</b>',
+					"IAM.NEW.SIGNIN.RIGHT.PANEL.VERIFY.TOTP":'Open your OneAuth and tap <b>Sign in another way</b>',
+					"IAM.NEW.SIGNIN.RIGHT.PANEL.ALLOW.TOTP":'Enter the OTP on sign-in page',
+					"IAM.NEW.SIGNIN.JWT.TITLE":'Sign in with JWT',
+					"IAM.SIGNIN.REMOVE.DOMAIN":'Remove domain',
+					"IAM.NEW.SIGNIN.INVALID.EMAIL.MESSAGE.NEW":'Please enter the OTP sent to your email address',
+					"IAM.NEW.SIGNIN.EMAIL.TITLE":'Sign in via email address',
+					"IAM.NEW.SIGNIN.RESEND.PUSH":'Resend Push',
+					"IAM.NEW.SIGNIN.RESEND.PUSH.COUNTDOWN":'Resend Push <span></span>s',
+					"IAM.NEW.SIGNIN.PUSH.RND.DESC":'Accept the push notification you received from OneAuth and tap the number you see here to approve your sign-in.',
+					"IAM.NO.RESULT.FOUND":'No result found',
+					"IAM.SEARCHING":'Search...',
+					"IAM.WEBAUTHN.ERROR.NotAllowedError":'Either you didn&#39;t allow this operation, or it got timed out. Please try again.',
+					"IAM.WEBAUTHN.ERROR.InvalidStateError":'This YubiKey is already registered with this account.',
+					"IAM.WEBAUTHN.ERROR.BrowserNotSupported" : 'This browser doesn&#39;t support the Webauthn/FIDO2 protocol. Please try again with a supported browser.',
+					"IAM.WEBAUTHN.ERROR.AUTHENTICATION.ErrorOccurred":'An error occurred while authenticating YubiKey. Please contact {0}.',
+					"IAM.WEBAUTHN.ERROR.AUTHENTICATION.PASSKEY.ErrorOccurred":'An error occurred while authenticating Passkey. Please contact {0}.',
+					"IAM.SIGNIN.ERROR.YUBIKEY.VALIDATION.FAILED":'YubiKey validation failed. Please try again.',
+					"IAM.WEBAUTHN.ERROR.AbortError":'Either you didn&#39;t allow this operation, or it got timed out. Please try again.',
+					"IAM.WEBAUTHN.ERROR.AUTHENTICATION.InvalidStateError":'This YubiKey is not registered with this account. Please try again with a registered YubiKey.',
+					"IAM.WEBAUTHN.ERROR.AUTHENTICATION.PASSKEY.InvalidStateError":'This Passkey is not registered with this account. Please try again with a registered Passkey.',
+					"IAM.WEBAUTHN.ERROR.AUTHENTICATION.InvalidResponse":'Invalid response from YubiKey. If you can&#39;t sign in another way, contact {0}.',
+					"IAM.WEBAUTHN.ERROR.AUTHENTICATION.PASSKEY.InvalidResponse":'Invalid response from Passkey. If you can&#39;t sign in another way, contact {0}.',
+					"IAM.PASS_POLICY.HEADING" : 'Password must contain:',
+					"IAM.PASS_POLICY.MIN_MAX" : 'Between {0} and {1} characters',
+					"IAM.PASS_POLICY.SPL" : 'At least {0} special characters',
+					"IAM.PASS_POLICY.SPL_SING" : 'At least 1 special character',
+					"IAM.PASS_POLICY.NUM" : 'At least {0} numbers',
+					"IAM.PASS_POLICY.NUM_SING" : 'At least 1 number',
+					"IAM.PASS_POLICY.CASE" : 'Both upper and lower case letters',
+					"IAM.NEW.SIGNIN.VERIFY.EMAIL.DESC" : 'Please enter your registered email address <b>{0}</b> to receive the OTP.',
+					"IAM.NEW.SIGNIN.VERIFY.EMAIL.TITLE" : 'Sign-in via email OTP',
+					"IAM.NEW.SIGNIN.VERIFY.EMAIL.OTP.TITLE" : 'An OTP has been sent to the email address <b>{0}</b>. Please enter the OTP you received to sign in.',
+					"IAM.NEW.SIGNIN.ENTER.EMAIL.ADDRESS" : 'Please enter your email address',
+					"IAM.NEW.SIGNIN.FEDERATED.LOGIN.TITLE" : 'Sign in using',
+					"IAM.NEW.SIGNIN.PASSWORDLESS.OTP.VERIFY.TITLE" : 'OTP via {0}',
+					"IAM.NEW.SIGNIN.PASSWORDLESS.EMAIL.VERIFY.TITLE" : 'Email via {0}',
+					"IAM.NEW.SIGNIN.PASSWORDLESS.PROBLEM.SIGNIN.HEADER" : 'To verify your identity, you have to verify both password (or equivalent) and MFA (or equivalent) to get access to your Zoho account.',
+					"IAM.WEBAUTHN.ERROR.UnknownError" : 'Something went wrong. Try again after some time. If the issue persists, restart your browser and try again.<br>For further assistance, contact support@zohoaccounts.com.'
+				});
+			$(document).ready(function() {
+				
+				fediconsChecking();
+			    if(isHideFedOptions === 0){
+			    	$(".fed_2show,.line,.fed_2show_small").hide();
+			    }
+				return false;
+			});
+			window.onload = function() {
+				$("#nextbtn").removeAttr("disabled"); 
+				onSigninReady();
+			}
+			function getSignupUrl(){
+					return 'https\x3A\x2F\x2Fwww.site24x7.com\x2Fsignup.html\x3Fpack\x3D44\x26l\x3Den';
+			}
+			function getSigninParms(){
+				var params = "cli_time=" + new Date().getTime();
+					params += "&servicename=" + euc('Site24x7');
+					serviceName=euc('Site24x7');
+					params += "&serviceurl="+euc('https\x3A\x2F\x2Fwww.site24x7.com\x2Flogin\x2Fsuccess.jsp');
+					serviceUrl = 'https\x3A\x2F\x2Fwww.site24x7.com\x2Flogin\x2Fsuccess.jsp';
+					params += "&service_language="+euc('en');//no i18N
+					params += "&signupurl="+euc('https\x3A\x2F\x2Fwww.site24x7.com\x2Fsignup.html\x3Fpack\x3D44\x26l\x3Den');//no i18N
+
+				return params;
+			}
+			function getRecoveryURL(){
+			 	var tmpResetPassUrl = resetPassUrl;
+					tmpResetPassUrl += "?servicename=" + euc('Site24x7');
+					tmpResetPassUrl += "&serviceurl="+euc('https\x3A\x2F\x2Fwww.site24x7.com\x2Flogin\x2Fsuccess.jsp');
+					tmpResetPassUrl += "&signupurl=" + euc('https\x3A\x2F\x2Fwww.site24x7.com\x2Fsignup.html\x3Fpack\x3D44\x26l\x3Den');//no i18N
+					tmpResetPassUrl += "&service_language="+ "en";
+				return tmpResetPassUrl;
+			}
+		</script>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+        <title>Zoho Accounts</title>
+	</head>
+	<body>
+			<div class="bg_one"></div>
+    		<div class="Alert"> <span class="tick_icon"></span> <span class="alert_message"></span> </div>
+    		<div class="Errormsg"> <span class="error_icon"></span> <span class="error_message"></span> </div>
+			<div class="tls_announce_banner" style="display:none;">
+				  <span class="icon-warning warningicon"></span>
+			      <span class="tls_banner_con">Your browser is outdated and not secure. Update the browser to the latest version to continue using Zoho. <a href="https://www.zoho.com/general/blog/end-of-support-for-older-tls-versions-in-zoho.html" style="color:#4FAFF7;text-decoration:none;">Learn more.</a></span>
+			      <div class="close_top"  onclick="this.parentElement.style.display='none';">
+	                <span class="close_line1"></span>
+	                <span class="close_line2"></span>
+            	  </div> 
+			</div>
+			<div class="container">
+    		<div class="signin_container">
+    			<div class='loader'></div> 
+    			<div class='blur_elem blur'></div>
+    			<div class="signin_box" id="signin_flow">
+							<div class='zoho_logo Site24x7'></div>
+	    				<div id="signin_div">
+	    					<form name="login" id="login" onsubmit="javascript:return submitsignin(this);"  method="post" novalidate >
+	    						<div class="signin_head">
+			    					<span id="headtitle">Sign in</span>
+			    					<span id="trytitle"></span>
+									<div class="service_name">to access <span>Site24x7</span></div>
+									<div class="fielderror"></div>
+								</div>
+								<div class="fieldcontainer">
+									<div class="searchparent" id="login_id_container">
+									<div class="textbox_div" id="getusername">
+									<span>
+
+										<input id="login_id" placeholder="Email address or mobile number" value="" type="email" name="LOGIN_ID" class="textbox" required="" onkeypress="clearCommonError('login_id')" onkeyup ="checking()" onkeydown="checking()" autocapitalize="off" autocomplete="webauthn username email" autocorrect="off"  tabindex="1" />
+										<span class="doaminat hide" onclick="enableDomain()">@</span>
+										<div class="textbox hide" id="portaldomain">
+										<select class='domainselect' id='domaincontainer' onchange='handleDomainChange()'></select>
+										</div>
+										<div class="fielderror"></div>		
+									</span>				
+									</div>
+									</div>
+									<div class="getpassword zeroheight" id="password_container">
+										<div class="hellouser">
+											<div class="username"></div>
+											<span class="Notyou bluetext" onclick="resetForm()">Change</span>
+										</div>
+										<div class="textbox_div">
+											<input id="password" placeholder="Enter password" name="PASSWORD" type="password" class="textbox" required="" onfocus="this.value = this.value;" onkeypress="clearCommonError('password')" autocapitalize="off" autocomplete="password" autocorrect="off" maxlength="250"/> 
+											<span class="icon-hide show_hide_password" onclick="showHidePassword();"></span>
+											<div class="fielderror"></div>
+											<div class="textbox_actions" id="enableotpoption">
+												<span class="bluetext_action" id="signinwithotp" onclick="showAndGenerateOtp()">Sign in using OTP</span>
+													<span class="bluetext_action bluetext_action_right" id="blueforgotpassword" onclick="goToForgotPassword();">Forgot Password?</span>
+											</div>
+											<div class="textbox_actions" id="enableforgot">
+													<span class="bluetext_action bluetext_action_right" id="blueforgotpassword" onclick="goToForgotPassword();">Forgot Password?</span>
+											</div>
+											<div class="textbox_actions_saml" id="enablesaml">
+												<span class="bluetext_action signinwithsaml" onclick="enableSamlAuth();">Sign in using SAML</span>
+													<span class="bluetext_action bluetext_action_right" id="blueforgotpassword" onclick="goToForgotPassword();">Forgot Password?</span>
+											</div>
+											<div class="textbox_actions_saml" id="enablejwt">
+												<a href="" class="bluetext_action signinwithjwt">Sign in using JWT</a>
+													<span class="bluetext_action bluetext_action_right" id="blueforgotpassword" onclick="goToForgotPassword();">Forgot Password?</span>
+											</div>	
+										</div> 
+									</div>
+							<div class="textbox_div" id="mfa_device_container">
+								<div class="devices">
+									<select class='secondary_devices' onchange='changeSecDevice(this);'></select>
+									<div class="deviceparent">
+										<span class="deviceinfo icon-device"></span>
+										<span class="devicetext"></span>
+									</div>
+								</div>
+								<div class='rnd_container'>
+									<div id="rnd_num"></div>
+									<div class="bluetext_action rnd_resend resendotp" onclick="javascript:return submitsignin($('#login'));">Resend Push</div>
+								</div>
+							</div>
+								<div id="otp_container">
+									<div class="hellouser">
+										<div class="username"></div>
+										<span class="Notyou bluetext" onclick="resetForm()">Change</span>
+									</div>
+									<div class="textbox_div" >
+										<input id="otp" placeholder="Enter OTP" type="number" name="OTP" class="textbox" required="" onkeypress="clearCommonError('otp')" autocapitalize="off" autocomplete="off" autocorrect="off"/> 
+										<div class="fielderror"></div>
+										<div class="textbox_actions otp_actions">
+											<span class="bluetext_action" id="signinwithpass" onclick="showPassword()">Sign in using password</span>
+											<span class="bluetext_action signinwithsaml" onclick="enableSamlAuth();">Sign in using SAML</span>
+											<a href="" class="bluetext_action signinwithjwt" >Sign in using JWT</a>
+											<span class="bluetext_action showmoresigininoption" onclick="showmoresigininoption()">Sign in another way</span>
+											<span class="bluetext_action bluetext_action_right resendotp" onclick="generateOTP(true)">Resend OTP</span>
+										</div>
+									</div>
+								</div>
+							<div class="textbox_div" id="mfa_otp_container">
+								<input id="mfa_otp" placeholder="Enter OTP" type="number" name="MFAOTP" class="textbox" required="" onkeypress="clearCommonError('mfa_otp')" autocapitalize="off" autocomplete="off" autocorrect="off"/> 
+								<div class="fielderror"></div>
+								<div class="textbox_actions">
+									<span class="bluetext_action bluetext_action_right resendotp" onclick="generateOTP(true)">Resend OTP</span>
+								</div>
+							</div>
+							<div class="textbox_div" id="mfa_totp_container">
+								<input id="mfa_totp" placeholder="Enter TOTP" type="number" name="TOTP" class="textbox" required="" onkeypress="clearCommonError('mfa_totp')" autocapitalize="off" autocomplete="off" autocorrect="off"/> 
+								<div class="fielderror"></div>
+							</div>
+							
+							<div class="qrcodecontainer" id="mfa_scanqr_container">
+								<span class="qr_before"></span>
+							    <img id="qrimg" src=""/>
+							    <span class="qr_after"></span>
+							</div>
+							<div class="textbox_div" id="captcha_container">
+								<input id="captcha" placeholder="Enter CAPTCHA" type="text" name="captcha" class="textbox" required="" onkeypress="clearCommonError('captcha')" autocapitalize="off" autocomplete="off" autocorrect="off" maxlength="8"/>
+								<div id="captcha_img" name="captcha" class="textbox"></div>
+								<span class="reloadcaptcha" onclick="changeHip()"> </span>
+								<div class="fielderror"></div> 
+							</div>
+							<div id="yubikey_container">
+								<div class="fielderror"></div>
+							</div>
+							<button class="btn blue waitbtn" id="waitbtn">
+									<span class="loadwithbtn"></span>
+									<span class="waittext">Waiting for approval</span>
+							</button>
+							</div>
+							<div class="textbox_actions_more" id="enablemore">
+								<span class="bluetext_action showmoresigininoption" onclick="showmoresigininoption()">Sign in another way</span>
+									<span class="bluetext_action bluetext_action_right blueforgotpassword" id="blueforgotpassword" onclick="goToForgotPassword();">Forgot Password?</span>
+								<span class="bluetext_action bluetext_action_right resendotp" id="resendotp" onclick="generateOTP(true)">Resend OTP</span>
+								
+								<div id="enableoptionsoneauth">
+									<span class="signinoptiononeauth" id="signinwithpassoneauth" onclick="showPassword()">Sign in using password</span>
+									<span class="signinoptiononeauth" id="passlessemailverify" onclick="showAndGenerateOtp('email')"></span>
+									<span class="signinoptiononeauth" id="signinwithotponeauth" onclick="showAndGenerateOtp('otp')"></span>
+									<span class="signinwithsamloneauth signinoptiononeauth" onclick="enableSamlAuth();">Sign in using SAML</span>
+									<span class="signinwithfedoneauth signinoptiononeauth" onclick="showMoreFedOptions();">Sign in using linked accounts</span>
+									<a href="" class="signinwithjwtoneauth signinoptiononeauth">Sign in using JWT</a>
+								</div>
+							</div>	
+							<div class="addaptivetfalist">
+									<div class="signin_head verify_title">Sign in another way</div>
+									<div class="optionstry optionmod" id="trytotp" onclick="tryAnotherway('totp')" >
+										<div class="img_option_try img_option icon-totp"></div>
+										<div class="option_details_try">
+											<div class="option_title_try">Offline TOTP verification</div>
+											<div class="option_description try_option_desc">Open OneAuth, tap <span class=trydesc>Sign in another way</span>, and enter it here to verify your sign-in.</div>
+										</div>
+										<div class='mfa_totp_verify verify_totp' id='verify_totp_container'> 
+											<input id="verify_totp" placeholder="Enter OTP" type="number" name="MFATOTP" class="textbox" required="" onkeypress="clearCommonError('verify_totp')" autocapitalize="off" autocomplete="off" autocorrect="off"/>
+											<button class="btn blue" id="totpverifybtn" tabindex="2" >
+												<span class="loadwithbtn"></span>
+												<span class="waittext">Verify</span>
+											</button>
+											<div class="fielderror"></div>
+										</div>
+									</div>
+									<div class="optionstry optionmod" id="tryscanqr" onclick="tryAnotherway('qr')" >
+										<div class="img_option_try img_option icon-qr"></div>
+										<div class="option_details_try">
+											<div class="option_title_try">Scan QR verification</div>
+											<div class="option_description try_option_desc">Open OneAuth and tap <span class=trydesc>Sign in another way</span>. Tap <span class=trydesc>Scan QR instead</span> to open code scanner. Scan the below code to verify sign-in.</div>
+										</div>
+										<div class="verify_qr" id="verify_qr_container">
+											<div class="qrcodecontainer">
+												<div>
+													<span class='qr_before'></span>
+												    <img id="verify_qrimg" src=""/>
+												   	<span class='qr_after'></span>
+												   	<div class="loader"></div>
+												   	<div class="blur_elem blur"></div>
+											   	</div>
+											</div>
+										</div>
+									</div>
+									<span class="close_icon error_icon" onclick="hideTryanotherWay()"></span>
+									<div class='text16 pointer nomargin' id='recoverybtn_mob' onclick='showCantAccessDevice()'>Can&#39;t access your mobile device?</div>
+									<div class="text16 pointer nomargin" id="problemsignin_mob" onclick="showproblemsignin()">Problem signing in?</div>
+							</div>
+							<div id="problemsigninui"></div>
+							
+							<button class="btn blue" id="nextbtn" tabindex="2" disabled="disabled"><span>Next</span></button>
+							<div class="btn borderless" onclick="hideBackupOptions()">Back</div>
+							<div class='text16 pointer nomargin' id='recoverybtn' onclick='showCantAccessDevice()'>Can&#39;t access your mobile device?</div>
+							<div class="text16 pointer nomargin" id="problemsignin" onclick="showproblemsignin()">Problem signing in?</div>
+							<div class="tryanother text16" onclick ="showTryanotherWay()">Sign in another way</div>
+								<div class="text16 pointer" id="forgotpassword"><a class="text16" onclick="goToForgotPassword();">Forgot Password?</a></div>
+	    					</form>
+	    					<div class="externaluser_container"></div>
+							<button class="btn blue" id="continuebtn" onclick="handleLookupDetails(JSON.stringify(deviceauthdetails),true);return false"><span>Continue</span></button>
+	    					<div id="recovery_container">
+								<div class="signin_head recoveryhead">
+									<table id="recoverytitle"><span class='icon-backarrow backoption' onclick='goBackToProblemSignin()'></span><span class="rec_head_text">Can&#39;t access your mobile device?</span></table>
+									</div>
+									<div id='recoverymodeContainer'></div>
+									<div class='recoverymodes'>
+										<div class="options options_hover" id="recoverOption" onclick="showBackupVerificationCode()">
+											<div class="img_option icon-backup"></div>
+											<div class="option_details">
+												<div class="option_title">Use backup verification code</div>
+												<div class="option_description">Backup verification codes are 12-digit codes that are given to you when you set up multi-factor authentication.</div>
+											</div>
+										</div>
+										<div class="options options_hover" id="passphraseRecover" onclick="showPassphraseContainer()">
+											<div class="img_option icon-saml"></div>
+											<div class="option_details">
+												<div class="option_title">Sign in using passphrase</div>
+												<div class="option_description">Use passphrase to sign in to your OneAuth app</div>
+											</div>
+										</div>
+										<div class="options contact_support">
+											<div class="img_option icon-support"></div>
+											<div class="option_details">
+												<div class="option_title">Contact Support</div>
+												<div class="option_description contactsuprt">Please send us an email at <a href="mailto:support@zohoaccounts.com" style="color:#696969;text-decoration:none;">support@zohoaccounts.com</a> describing your issue so we can assist you.</div>
+										</div>
+									</div>
+								</div>
+								<div class="btn greytext" ></div>
+						   </div>
+						   <form id='backup_container' onsubmit="javascript:return verifyBackupCode()" novalidate>
+								<div class="signin_head backuphead">
+									<span id="backup_title"><span class='icon-backarrow backoption' onclick='showCantAccessDevice()'></span>Use backup verification code</span>
+									<div class="backup_desc extramargin">Backup verification codes are 12-digit codes that are given to you when you set up multi-factor authentication.</div>
+								</div>
+								<div class="textbox_div" id="backupcode_container">
+									<input id="backupcode" placeholder='Backup verification code' type="text" name="backupcode" class="textbox" required="" onkeypress="clearCommonError('backupcode')" onkeyup="submitbackup(event)" autocapitalize="off" autocomplete="off" autocorrect="off"/> 
+									<div class="fielderror"></div>
+									<span class="bluetext_action" id="recovery_passphrase" onclick="changeRecoverOption('passphrase')">Sign in using passphrase</span>
+								</div>
+								<div class="textbox_div" id="passphrase_container">
+									<input id="passphrase" placeholder="Enter passphrase" type="password" name="PASSPHRASE" class="textbox" required="" onkeypress="clearCommonError('passphrase')" autocapitalize="off" autocomplete="off" autocorrect="off"/>
+									<span class="icon-hide show_hide_password" onclick="showHidePassword();"></span>
+									<div class="fielderror"></div>
+									<span class="bluetext_action" id="recovery_backup" onclick="changeRecoverOption('recoverycode')">Sign in using backup codes</span>
+								</div>
+								<div class="textbox_div" id="bcaptcha_container">
+									<input id="bcaptcha" placeholder="Enter CAPTCHA" type="text" name="captcha" class="textbox" required="" onkeypress="clearCommonError('bcaptcha')" onkeyup="submitbackup(event)" autocapitalize="off" autocomplete="off" autocorrect="off" maxlength="8"/>
+									<div id="bcaptcha_img" name="captcha" class="textbox"></div>
+									<span class="reloadcaptcha" onclick="changeHip('bcaptcha_img','bcaptcha')"> </span>
+									<div class="fielderror"></div> 
+								</div>
+								<button class="btn blue">Verify</button>
+								<div class="btn borderlessbtn back_btn"></div>
+							</form>
+							<form id="emailcheck_container" onsubmit="javascript:return verifyEmailValid();" novalidate>
+								<div class="signin_head emailcheck_head">
+									<span id="backup_title"><span class='icon-backarrow backoption' onclick='hideEmailOTPInitiate()'></span>Sign-in via email OTP</span>
+									<div class="backup_desc extramargin" id="emailverify_desc">Please enter your registered email address <b>{0}</b> to receive the OTP.</div>
+								</div>
+								<div class="textbox_div" id="emailvalidate_container">
+									<input id="emailcheck" placeholder="Enter email address" name="EMAILCHECK" type="email" class="textbox" required="" onkeypress="clearCommonError('emailcheck')" autocapitalize="off" autocomplete="on" autocorrect="off" maxlength="250"/> 
+									<div class="fielderror"></div>
+								</div>
+								<button class="btn blue">Next</button>
+							</form>
+							<form id="emailverify_container" onsubmit="javascript:return verifyEmailOTP();" novalidate>
+								<div class="signin_head emailverify_head">
+									<span id="backup_title"><span class='icon-backarrow backoption' onclick='hideEmailOTPVerify()'></span>Sign-in via email OTP</span>
+									<div class="backup_desc extramargin" id="emailverify_desc">Please enter your registered email address <b>{0}</b> to receive the OTP.</div>
+								</div>
+								<div class="textbox_div" id="emailotpverify_container">
+									<input id="emailverify" placeholder="Enter OTP" name="EMAILVERIFY" type="email" class="textbox" required="" onkeypress="clearCommonError('emailverify')" autocapitalize="off" autocomplete="on" autocorrect="off" maxlength="250"/> 
+									<div class="fielderror"></div>
+								</div>
+								
+								<span class="bluetext_action" id="signinwithpass" onclick="showPassword()">Sign in using password</span>
+								<span class="bluetext_action signinwithsaml" onclick="enableSamlAuth();">Sign in using SAML</span>
+								<a href="" class="bluetext_action signinwithjwt" >Sign in using JWT</a>
+								<span class="bluetext_action bluetext_action_right resendotp" onclick="generateOTP(true)">Resend OTP</span>
+								<div class="textbox_actions_more" id="enablemore">
+									<span class="bluetext_action showmoresigininoption" onclick="showmoresigininoption('getbackemailverify');">Sign in another way</span>
+										<span class="bluetext_action bluetext_action_right blueforgotpassword" id="blueforgotpassword" onclick="goToForgotPassword();">Forgot Password?</span>
+									<span class="bluetext_action bluetext_action_right resendotp" id="resendotp" onclick="generateOTP(true)">Resend OTP</span>
+								</div>	
+								<button class="btn blue" >Verify</button>
+							</form> 
+	    				<div>
+	    		</div>
+	    			<div class="line">
+		    			<span class="line_con">
+		    				<span>Or</span>
+		    			</span>
+	    			</div>
+	    				<div class="fed_2show_small" onclick="showMoreIdps();"></div>
+	    				<div class="fed_2show">
+							<div class="signin_fed_text">Sign in using</div>
+								<span class="fed_div large_box apple_normal_icon apple_fed" id="macappleicon" onclick="createandSubmitOpenIDForm('apple');" title="Sign in using Apple">
+						           <div class="fed_center_apple">
+						                <span class="fed_icon"></span>
+						                <span class="fed_text">Sign in with Apple</span>
+						            </div>
+						        </span>
+								<span class="fed_div large_box google_icon google_fed" onclick="createandSubmitOpenIDForm('google');" title="Sign in using Google">
+						            <div class="fed_center_google">
+						                <span class="fed_icon googleIcon"></span>
+						            </div>
+						        </span>
+								<span class="fed_div large_box MS_icon azure_fed" onclick="createandSubmitOpenIDForm('azure');" title="Sign in using Microsoft">
+						            <div class="fed_center">
+						                <span class="fed_icon"></span>
+						                <span class="fed_text">Microsoft</span>
+						            </div>
+						        </span>
+								 <span class="fed_div large_box linkedin_fed_box linkedin_fed" onclick="createandSubmitOpenIDForm('linkedin');" title="Sign in using Linkedin">
+						            <div class="fed_center">
+						                <span class="fed_icon linked_fed_icon"></span>
+						            </div>
+						        </span>
+								<span class="fed_div large_box fb_fed_box facebook_fed" onclick="createandSubmitOpenIDForm('facebook');" title="Sign in using Facebook">
+									<div class="fed_center">
+							            <div class="fed_icon fb_fedicon"></div>
+							            <span class="fed_text">Facebook</span>
+							        </div>
+						        </span>
+								<span class="fed_div large_box twitter_fed_box twitter_fed" onclick="createandSubmitOpenIDForm('twitter');" title="Sign in using Twitter">
+						            <div class="fed_center">
+						                <span class="fed_icon"></span>
+						                <span class="fed_text">Twitter</span>
+						            </div>
+						        </span>
+								<span class="fed_div large_box yahoo_icon yahoo_fed"  onclick="createandSubmitOpenIDForm('yahoo');" title="Sign in using Yahoo">
+						            <div class="fed_icon yahoo_fedicon"></div>
+						        </span>
+								<span class="fed_div large_box slack_icon slack_fed" onclick="createandSubmitOpenIDForm('slack');" title="Sign in using Slack">
+						            <div class="fed_icon slack_fedicon"></div>
+						        </span>
+								<span class="fed_div large_box apple_normal_icon apple_fed" id="appleNormalIcon" onclick="createandSubmitOpenIDForm('apple');" title="Sign in using Apple">
+						             <div class="fed_center">
+						                <span class="fed_icon"></span>
+						                <span class="fed_text">Sign in with Apple</span>
+						            </div>
+						        </span>
+							<span class="fed_div more" id="showIDPs" title="More" onclick="showMoreIdps();"> <span class="morecircle"></span> <span class="morecircle"></span> <span class="morecircle"></span></span>
+							<div class="zohosignin hide" onclick="showZohoSignin()">Sign in with Zoho<span class="fedarrow"></span></div>	
+					</div>
+    			</div>
+    			<div class="nopassword_container">
+    				<div class="nopassword_icon icon-hint"></div>
+    				<div class="nopassword_message">You have not set a password for this account <a href="javascript:goToForgotPassword();">Set password now</a>.</div>
+    			</div>
+    			<div class="go_to_bk_code_container">
+    				<div class="close_btn" onclick="hideBkCodeRedirection()"></div>
+    				<div class="nopassword_icon icon-hint"></div>
+    				<div class="backup_info_tab">
+    					<div style="font-size:12px;font-weight:500;">Try Backup Verification Code</div>
+    					<div style="margin-top: 5px;color: #000000BF;">If you are unable to sign in using SMS-based OTP, you can use backup verification codes to sign in.</div>
+    				</div>
+    				<div class="button_parent"><span class="backup_action" onclick="showBackupVerificationCode()">Try Now</span></div>
+    			</div>
+    			<div class="password_expiry_container">
+    				<div class="passexpsuccess"></div>
+    				<div class="signin_head">
+							<span id="headtitle">Password expired</span>
+							<div class="pass_name extramargin" id="password_desc"></div>
+					</div>
+					<div class="textbox_div" id="npassword_container">
+							<input id="new_password" onkeyup="setPassword(event)" placeholder='Enter new password' name="newPassword" type="password" class="textbox" required="" onkeypress="clearCommonError('password')" autocapitalize="off" autocomplete="password" autocorrect="off" />
+							<span class="icon-hide show_hide_password" onclick="showHidePassword();"></span>
+							<div class="fielderror"></div>
+					</div>
+					<div class="textbox_div" id="rpassword_container">
+							<input id="new_repeat_password" onkeyup="setPassword(event)" placeholder='Confirm Password' name="cpwd" type="password" class="textbox" required="" onkeypress="clearCommonError('password')" autocapitalize="off" autocomplete="password" autocorrect="off" /> 
+					</div>
+					<button class="btn blue" id="changepassword" onclick="updatePassword();"><span>Set password</span></button>
+    			</div>
+    			<div class="terminate_session_container">
+    				<div class="signin_head">
+							<span id="headtitle">Terminate Sessions</span>
+							<div class="pass_name extramargin" id="password_desc">Apart from changing your password, you can also choose any of the following options, if you feel your account is compromised.</div>
+					</div>
+					<form id="terminate_session_form" name="terminate_session_container" onsubmit="return send_terminate_session_request(this);" novalidate>
+						<div class="checkbox_div" style="padding: 10px 0px 10px 15px;">
+							<input id="termin_web" name="signoutfromweb" class="checkbox_check" type="checkbox">
+							<span class="checkbox">
+								<span class="checkbox_tick"></span>
+							</span>
+							<label for="termin_web" class="checkbox_label">Terminate all browser sessions.</label>
+						</div>
+						<div class="checkbox_div" style="padding: 10px 0px 10px 15px;">
+							<input id="termin_mob" name="signoutfrommobile" class="checkbox_check" type="checkbox" onchange="showOneAuthTerminate(this)">
+							<span class="checkbox">
+								<span class="checkbox_tick"></span>
+							</span>
+							<label for="termin_mob" class="checkbox_label big_checkbox_label">Terminate all web and mobile app sessions.</label>
+						</div>
+						<div class="oneAuthLable">
+							<span class="oneauth_icon one_auth_icon_v2"></span>
+							<span class="text_container">
+								<div class="text_header">Include OneAuth</div>
+								<div class="text_desc">If enabled, you need to verify your new password in OneAuth app installed on your Primary Device.</div>
+							</span>
+							<div class="togglebtn_div include_oneAuth_button">
+								<input class="real_togglebtn" id="include_oneauth" type="checkbox">
+								<div class="togglebase">
+									<div class="toggle_circle"></div>
+								</div>
+							</div>
+						</div>
+						<div class="checkbox_div checkbox_mod" style="padding: 10px 0px 10px 15px;">
+							<input id="termin_api" name="signoutfromapiToken" class="checkbox_check" type="checkbox">
+							<span class="checkbox">
+								<span class="checkbox_tick"></span>
+							</span>
+							<label for="termin_api" class="checkbox_label big_checkbox_label">Revoke access granted for all connected apps.</label>
+						</div>
+						<button class="btn blue" id="terminate_session_submit"><span>Continue</span></button>
+					</form>
+    			</div>
+    				<div class="trustbrowser_ui">
+						<div class="signin_head">
+							<span id="headtitle">Trust this browser?</span>
+							<div class="service_name mod_sername"></div>
+						</div>
+						<button class="btn blue trustdevice trustbtn" onclick="updateTrustDevice(true)">
+							<span class="loadwithbtn"></span>
+							<span class="waittext">Trust</span>
+						</button>
+						<button class="btn grey trustdevice notnowbtn"  onclick="updateTrustDevice(false)">
+							<span class="loadwithbtn"></span>
+							<span class="waittext">Not now</span>
+						</button>
+				</div>
+				<div id="restict_signin">
+					<div class='signin_head restrict_head'>Access denied</div>
+					<div class='restrict_icon'></div> 
+					<div class='restrict_desc service_name'>You&#39;ve enabled Restrict Sign-in for your Zoho account. You can disable it in the OneAuth app.</div>
+					<button class="btn blue trybtn" id="nextbtn" tabindex="2" onclick="window.location.reload()">Try again</button>
+				</div>
+    		</div>
+    		
+    		<div class="rightside_box">
+    			<div class='mfa_panel'>
+    					<div class='pwlessBanner'>
+							<div class="pwless_img" id="product_img"></div>
+							<div class="pwless_head">Experience Passwordless Sign-in</div>
+							<div class="pwless_text">Move away from risky passwords and experience one-tap access to your Zoho account. Download and install Zoho OneAuth.</div>
+							<div class='MAppIcon'>
+								<a class='GPlayIcon' href='https://play.google.com/store/apps/details?id=com.zoho.accounts.oneauth&referrer=utm_source=za_signin&utm_medium=web&utm_campaign=za_signin_pwdless_promo'></a>
+								<a class='AStoreIcon' href='https://apps.apple.com/app/apple-store/id1142928979?pt=423641&ct=za_signin_pwdless_promo&mt=8'></a>
+							</div>
+							<a class='OnaAuthHLink' href='https://zoho.to/6li'>Learn more</a>
+						</div>	
+				</div>
+				<div class='oneauth_panel hide'>
+					<div class="Steps">
+	                    <div class="Step" id="Step1" onclick="ClickStep(1,true)">
+	                        <div class="step_values active_step">1</div>
+	                        <div class="step_after">
+	                            <div class="animate_line"></div>
+	                        </div>
+	                    </div>
+	                    <div class="Step" id="Step2" onclick="ClickStep(2,true)">
+	                        <div class="step_values">2</div>
+	                        <div class="step_after">
+	                            <div class="animate_line"></div>
+	                        </div>
+	                    </div>
+	                    <div class="Step" id="Step3" onclick="ClickStep(3,true)">
+	                        <div class="step_values">3</div>
+	                    </div>
+	                </div> 
+	                <div class="text_div"> 
+	                    <div class="overlap_div">  
+	                        <div class="step_content step_one">Tap the push notification you received on your device</div> 
+	                        <div class="step_content step_two">Tap <b>ALLOW SIGN IN</b></div> 
+	                        <div class="step_content step_three">Your sign-in request approved</div>   
+	                    </div> 
+	                </div>
+	                <div class="MFA_illustration PushCame"></div>
+				</div>
+    		</div>
+		</div>    	
+			<div id="signuplink">Don&#39;t have a Zoho account? <a href="javascript:register()">Sign Up Now</a></div>
+		<div id="enableCookie" style='display:none;text-align:center'>
+                   <div class='zoho_logo Site24x7 zoho_logo_position_center'></div>
+            <div style="text-align: center;padding: 10px;">Cookies are disabled for your browser. Please enable cookies to continue.</div>
+	    </div>
+	    
+	    <noscript>
+		    <div style="position: fixed; top: 0px; left: 0px; z-index: 3;height: 100%; width: 100%; background-color: #FFFFFF">
+		    	<div id="enableCookie" style='text-align:center'>
+		                   <div class='zoho_logo Site24x7 zoho_logo_position_center'></div>
+		            <div style="text-align: center;padding: 10px;">JavaScript is disabled for your browser. Please enable it in your browser settings and try again.</div>
+	    		</div>
+		    </div>
+		</noscript>
+		</div>
+<style>
+#footer
+{	
+    width: 100%;
+    height: 20px;
+    font-size: 14px;
+    color: #727272;
+   	position:absolute;
+   	left:0px;
+   	right:0px;
+    margin:20px auto;
+    text-align:center;
+    font-size: 14px;
+    bottom: 0px;
+}
+#footer a
+{
+    text-decoration:none;
+    color: #727272;
+    font-size: 14px;
+}
+
+@media only screen and (max-width : 420px)
+{
+	#footer a,#footer{	
+		font-size: 12px;
+	}
+}
+</style>
+
+<footer id="footer"> 
+
+	<span>
+		&copy 2022, <a href=http://www.zohocorp.com/ target=_blank >Zoho Corporation Pvt. Ltd.</a> All Rights Reserved.	</span>
+	
+</footer>
+
+<script>
+	function setFooterPosition(){
+		var container = document.getElementsByClassName("container")[0];
+		var top_value = window.innerHeight-60;
+		if(container && (container.offsetHeight+container.offsetTop+30)<top_value){
+			document.getElementById("footer").style.top = top_value+"px"; // No I18N
+		}
+		else{
+			document.getElementById("footer").style.top = container && (container.offsetHeight+container.offsetTop+30)+"px"; // No I18N
+		}
+	}
+	window.addEventListener("resize",function(){
+		setFooterPosition();
+	});
+	window.addEventListener("load",function(){
+		setFooterPosition();
+	});
+</script>	</body>
+</html>

@@ -1,0 +1,522 @@
+
+/* DESKTOP VIEW */
+@media (min-width: 700px){
+    *{
+      box-sizing: border-box;
+    }
+    
+    body{
+      /* background-image: url(./comp3.jfif); */
+      /* background-repeat: repeat-y; */
+      /* background-size: cover; */
+      background-color: rgb(196, 185, 171);
+      margin: 0;
+      padding: 0;
+      
+      --nav-load-time: 800ms;
+      --contact-form-time: 300ms;
+      --contact-form-delay: calc(var(--nav-load-time) + var(--contact-form-time));
+    }
+    
+    .myhead{
+      font-family: cursive;
+      font-size: 2rem;
+      margin-left: 2rem;
+      padding: 0;
+    }
+    
+    #mynav a{
+      color: white;
+      font-size: 1rem;
+      font-family: Tahoma;
+      font-weight: bold;
+      text-decoration: none;
+      margin: auto;
+      padding: 1rem;
+    }
+    
+    #mynav{
+      background-color: black;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 5px solid red;
+
+      animation: nav-load var(--nav-load-time) ease-in;
+    
+    }
+
+    @keyframes nav-load {
+      0%{
+        transform: translateX(100%);
+      }
+
+      100%{
+        transform: translateX(0%);
+      }
+    }
+    
+    #navlink{
+    display: flex;
+    margin: 0;
+    padding: 0;
+    }
+    
+    #mylist{
+      display: flex;
+      list-style: none;
+      margin: 0%;
+      padding-block: 2rem;
+      padding-inline: 0rem;
+      
+    }
+    
+    #navlink li a:hover{
+    background-color: red;
+    width: 100;
+    }
+    
+    .li{
+      list-style: none;
+      margin: 0;
+      padding: 0;
+     
+    }
+
+    /* body */
+    
+    .welcomeback{
+      text-align: center;
+      font-family: cursive;
+    }  
+
+    .contact_form{
+      animation: contact-form var(--contact-form-time);
+      /* animation-delay: var(--contact-form-delay); */
+    }
+
+    @keyframes contact-form {
+      0%{
+        transform: translatex(-100%);
+      }
+
+      100%{
+        transform: translatex(0%);
+      }
+    }
+
+    .my_form{
+      margin-left: 3rem;
+    }
+
+    .my_form input{
+      text-align: center;
+      font-size: 1rem;
+      font-family: tahoma;
+      height: 3rem;
+      width: 17rem;
+      margin: 1rem;
+      border-radius: 0.5rem;
+      outline: none;
+      box-shadow: 1px 1px 1px 1px rgb(10, 10, 10);
+    }
+
+    .my_form #textarea{
+      text-align: center;
+      font-size: 1rem;
+      font-family: tahoma;
+      border-radius: 0.5rem;
+      outline: none;
+      margin: 1rem;
+      padding-top: 7rem;
+      height: 15rem;
+      width: 36.3rem;
+      box-shadow: 2px 2px 2px 2px rgb(10, 10, 10);
+    }
+
+    .contact_form  .footer_images  {
+      margin-left: 8rem;
+      padding: 1rem;
+
+    }
+
+    .my_form button{
+      background-color: rgb(240, 9, 9);
+      color: white;
+      font-size: tahoma;
+      font-size: 1.5rem;
+      border-radius: 0.5rem;
+      font-weight: bold;
+      cursor: pointer;
+      outline: none;
+      height: 3rem;
+      width: 10rem;
+      margin-left: 14rem;
+      margin-top: 0.5rem;
+      box-shadow: 2px 2px 2px 2px rgb(10, 10, 10);
+    }
+
+    .my_form button:hover{
+      background-color: rgb(15, 15, 15);
+      color: white;
+      font-size: tahoma;
+      font-size: 1.5rem;
+      border-radius: 0.5rem;
+      font-weight: bold;
+      outline: none;
+      height: 3rem;
+      width: 10rem;
+      margin-left: 14rem;
+      margin-top: 0.5rem;
+      box-shadow: 2px 2px 2px 2px rgb(10, 10, 10);
+    }
+
+    .my_form button:active{
+      background-color: rgb(205, 207, 205);
+      color: rgb(20, 20, 20);
+      font-size: tahoma;
+      font-size: 1.5rem;
+      border-radius: 0.5rem;
+      font-weight: bold;
+      outline: none;
+      height: 3rem;
+      width: 10rem;
+      margin-left: 14rem;
+      margin-top: 0.5rem;
+      box-shadow: 2px 2px 2px 2px rgb(10, 10, 10);
+    }
+
+    /* Footer */
+    .my_footer{
+      background-color: #555;
+      font-family: tahoma;
+      text-align: center;
+      height: 22rem;
+      padding: 1;
+  }
+
+  h2{
+      color: white;
+      font-family: tahoma;
+      font-size: 2rem;
+      padding-top: 2rem;
+  }
+  .my_footer p{
+      color: white;
+      font-family: tahoma;
+      font-size: 1.2rem;
+      margin-left: 15rem;
+      margin-right: 15rem;
+  }
+
+  .footer_images img{
+      height: 2rem;
+      border-radius: 0.5rem;
+      padding: 0;
+      margin: 0;
+  }
+
+  .footer_images img a{
+      padding: 0;
+      margin: 0;
+  }
+
+  /* footer links*/
+  .Alright_reserve{
+      font-family: cursive;
+      font-size: 2rem;
+      margin-left: 2rem;
+      padding: 0;
+    }
+    
+    a{
+      color: white;
+      font-size: 0.8rem;
+      font-family: Tahoma;
+      font-weight: bold;
+      text-decoration: none;
+      padding: 0.5rem;
+    }
+
+    
+    #footernav{
+      background-color: black;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 3rem;
+    
+    }
+
+    #footernav p{
+      font-family: tahoma;
+      font-size: 1rem;
+        margin-left: 1rem;
+    }
+     
+    #footer_list{
+      display: flex;
+      list-style: none;
+      padding-block: 2rem;
+      padding-inline: 0rem; 
+    }
+
+    #footer_list li a:hover{
+      width: 100;
+      }
+    
+    .li{
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+}
+    
+    /* DISPLAY ON MOBILE */
+    @media screen and (min-width: 350px) and (max-width: 700px){
+      *{
+        box-sizing: border-box;
+      }
+      
+    body{
+      background-color: rgb(215, 220, 221);
+      margin: 0;
+      padding: 0;
+
+      --nav-load-time: 800ms;
+      --contact-form-time: 300ms;
+      --contact-form-delay: calc(var(--nav-load-time) + var(--contact-form-time));
+    }
+    
+    .myhead{
+      color: white;  
+      font-family: cursive;
+      text-align: center;
+      font-size: 3.4rem;
+      margin: 0;
+      padding: 0;
+    }
+    
+    a{
+      color: white;
+      font-size: 1.3rem;
+      font-family: Tahoma;
+      font-weight: bold;
+      text-decoration: none;
+      display: block;
+      align-items: space-between;
+      margin: 0;
+      padding: 1rem;
+    }
+    
+    #mynav{
+      background-color: #333;
+      text-align: center;
+      align-items: space-between;
+      display: block;
+      margin: 0;
+      padding: 0;
+      animation: nav-load var(--nav-load-time) ease-in;
+    }
+
+    @keyframes nav-load {
+      0%{
+        transform: translateX(100%);
+      }
+
+      100%{
+        transform: translateX(0%);
+      }
+    }
+    
+    #navlink li a:hover{
+      background-color: #555;
+      }
+      
+    
+    #navlink{
+      display: block;
+      margin: 0;
+      padding: 0;
+    }
+    
+    #mylist{
+      color: white;
+      list-style: none;
+      align-items: center;
+      display: inline-block;
+      margin: 0;
+    }
+    
+    .li{
+      margin: 0;
+      padding: 0;
+      
+    }
+    
+    h1{
+      text-align: center;
+      color: green;
+    }
+
+    .contact_form{
+      text-align: center;
+      animation: contact-form var(--contact-form-time);
+    }
+
+    @keyframes contact-form {
+      0%{
+        transform: translatex(-100%);
+      }
+
+      100%{
+        transform: translatex(0%);
+      }
+    }
+
+    .my_form{
+        margin: 0;
+    }
+
+    .my_form input{
+      text-align: center;
+      font-size: 1rem;
+      font-family: tahoma;
+      height: 3.5rem;
+      width: 22rem;
+      margin: 0.5rem;
+      border-radius: 0.5rem;
+      outline: none;
+      box-shadow: 2px 2px 2px 2px rgb(10, 10, 10);
+    }
+
+    .my_form #textarea{
+      text-align: center;
+      font-size: 1rem;
+      font-family: tahoma;
+      border-radius: 0.5rem;
+      outline: none;
+      padding-top: 3rem;
+      height: 8rem;
+      width: 22rem;
+      box-shadow: 2px 2px 2px 2px rgb(10, 10, 10);
+    }
+
+    .contact_form  .footer_images  {
+      text-align: center;
+      display: inline-flex;
+      padding: 1rem;
+
+    }
+
+    .my_form button{
+      background-color: rgb(30, 34, 30);
+      color: white;
+      font-size: tahoma;
+      font-size: 1.5rem;
+      text-align: center;
+      border-radius: 0.5rem;
+      font-weight: bold;
+      cursor: pointer;
+      outline: none;
+      height: 3rem;
+      width: 10rem;
+      margin-left: 1rem;
+      margin-top: 0.5rem;
+      margin-bottom: 1rem;
+      box-shadow: 2px 2px 2px 2px rgb(10, 10, 10);
+    }
+
+    /* Footer */
+    .my_footer{
+      background-color: #555;
+      font-family: tahoma;
+      text-align: center;
+      /* display: flex; */
+      height: 22rem;
+      padding: 1;
+  }
+
+  h2{
+      color: white;
+      font-family: tahoma;
+      font-size: 2rem;
+      padding-top: 2rem;
+  }
+  .my_footer p{
+      color: white;
+      font-family: tahoma;
+      font-size: 1.2rem;
+      margin: 1rem;
+  }
+
+  .footer_images img{
+    display: table-column;
+      height: 2rem;
+      border-radius: 0.5rem;
+      padding: 0;
+      margin: 0;
+  }
+
+  .footer_images img a{
+      padding: 0;
+      margin: 0;
+  }
+
+  /* footer links*/
+  .Alright_reserve{
+      font-family: cursive;
+      font-size: 2rem;
+      margin-left: 2rem;
+      padding: 0;
+    }
+    
+    a{
+      color: white;
+      font-size: 0.7rem;
+      font-family: Tahoma;
+      font-weight: bold;
+      display: inline-flex;
+      text-decoration: none;
+      padding: 0.5rem;
+    }
+
+    #footernav{
+      background-color: black;
+      background-clip: border-box;
+      color: white;
+      display: flex;
+      height: 8rem;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 3rem;
+    }
+
+    #footernav p{
+      font-size: 0.8rem;
+      margin: 0.5;
+    }
+     
+    #footer_list{
+      display: inline-flex;
+      list-style: none;
+      padding-block: 2rem;
+      padding-inline: 0rem; 
+    }
+
+    #footer_list li a:hover{
+      width: 100;
+    }
+    
+    .li{
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+
+    }
+    
